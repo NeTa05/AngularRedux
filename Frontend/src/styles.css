@@ -2,3 +2,15 @@
 
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+body {
+   background-image: linear-gradient(to top, #e3eeff 0%, #e3eeff 99%, #e3eeff 100%);
+}
+
+.ml-xs{
+	margin-left: 5px;
+}
+
+.ml-sm{
+	margin-left: 10px;
+}
