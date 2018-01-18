@@ -18,8 +18,7 @@ class VerifyBasicAuth
      */
     public function handle($request, Closure $next)
     {   
-        print_r($request->header('Authorization'));die();
-        //return response()->json(['error'=> $request->header('Authorization')], 401);
+       
         if (!$this->canAccess($request->header('Authorization'))) {
             return response()->json(['error'=> 'Unauthorized'], 401);
         }
