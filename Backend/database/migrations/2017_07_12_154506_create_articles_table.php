@@ -18,8 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->float('price');
-            $table->float('total_in_shelf');
-            $table->float('total_in_vault');
+            $table->integer('total_in_shelf');
+            $table->integer('total_in_vault');
             $table->integer('store_id')->unsigned();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
         });

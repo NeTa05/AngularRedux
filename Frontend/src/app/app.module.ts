@@ -7,6 +7,7 @@ import {
   Routes
 } from '@angular/router';
 
+//Components
 import { AppComponent } from './app.component';
 import { AppBootstrapModule } from './modules/app-bootstrap.module';
 import { StoresComponent } from './components/stores/stores.component';
@@ -14,7 +15,9 @@ import { ArticlesComponent } from './components/articles/articles.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TableComponent } from './components/table/table.component';
-import { AsdComponent } from './asd/asd.component';
+
+//providers
+import { appStoreProviders } from './redux/app.store';
 
 const routes: Routes = [
   { path: '', redirectTo: 'store', pathMatch: 'full' },
@@ -29,8 +32,7 @@ const routes: Routes = [
     ArticlesComponent,
     NavigationComponent,
     HeaderComponent,
-    TableComponent,
-    AsdComponent
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ const routes: Routes = [
     AppBootstrapModule,
     RouterModule.forRoot(routes, { useHash: true })
   ],
-  providers: [],
+  providers: [appStoreProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

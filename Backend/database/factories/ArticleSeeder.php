@@ -7,8 +7,8 @@ $factory->define(App\Article::class, function (Generator $faker) {
         'name' => $faker->word,
         'description' => $faker->word,
         'price' => $faker->randomFloat,
-        'total_in_shelf' => $faker->randomFloat,
-        'total_in_vault' => $faker->randomFloat,
+        'total_in_shelf' => $faker->randomNumber,
+        'total_in_vault' => $faker->randomNumber,
         'store_id' => $faker->numberBetween(1, 10)
     ];
 });
