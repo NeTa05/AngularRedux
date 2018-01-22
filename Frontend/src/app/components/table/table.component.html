@@ -6,12 +6,12 @@
             <th class="col-sm-2">Actions</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody >
+        <tr *ngFor="let store of stores">
             <td>
-                <a href="#/product/1" class="">Angular</a>
+                <a href="#/product/1" class="">{{store.name}}</a>
             </td> 
-            <td>Superheroic JavaScript MVW Framework.</td>
+            <td>{{store.address}}</td>
             <td class="actions">
                 <a href="#/product/1/edit" class="btn btn-warning pull-left">Edit</a> 
                 <a href="#/product/1/delete" class="btn btn-danger pull-right">Delete</a>
@@ -19,7 +19,3 @@
         </tr>
     </tbody>
 </table>
-
-<button (click)="increment()" class="btn btn-primary">
-        Increment
-    </button>
