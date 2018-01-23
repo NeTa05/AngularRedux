@@ -21,6 +21,7 @@ class StoreController extends Controller
     */
     public function index()
     {
+        //return 'asd';
         try {
             return $this->toJSON(StoreRepository::getAll());
         } catch (\Exception $e) {

@@ -18,6 +18,7 @@ import { TableComponent } from './components/table/table.component';
 
 //providers
 import { appStoreProviders } from './redux/app.store';
+import { AUTH_PROVIDERS } from './services/store.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'store', pathMatch: 'full' },

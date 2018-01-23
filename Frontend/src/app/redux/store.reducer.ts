@@ -11,6 +11,8 @@ import {
   Store as StoreModel
 } from '../models/store.model';
 
+
+
 const initialState: AppState = { stores: [
     new StoreModel(1, 'Store1', 'Address1'),
     new StoreModel(1, 'Store1', 'Address1')
@@ -20,7 +22,7 @@ const initialState: AppState = { stores: [
 export const counterReducer: Reducer<AppState> =
   (state: AppState, action: Action): AppState => {
     switch (action.type) {
-      case GET:       
+      case GET:   
         return Object.assign({}, state, { stores: [
                 new StoreModel(1, 'Store1', 'Address1'),
                 new StoreModel(1, 'Store2', 'Address2')]
