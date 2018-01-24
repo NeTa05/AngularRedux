@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAppState } from '../store/app.state';
+import { AppState } from '../stores/app.state';
 import { NgRedux } from '@angular-redux/store';
 
 import {
@@ -16,7 +16,7 @@ export class StoresActions {
   static STORES_DELETE = 'STORES_DELETE';
 
   constructor(
-    private ngRedux: NgRedux<IAppState>,
+    private ngRedux: NgRedux<AppState>,
     private http: Http
   ) { }
   
@@ -26,12 +26,12 @@ export class StoresActions {
       "http://localhost:8000/services/stores",
        this.generateHeaders()
     ).subscribe((res: Response) => {
-      const list = res.json();
+      const stores = res.json().store;
       console.log(res.json());
       this.ngRedux.dispatch({
         type: StoresActions.STORES_GET,
         payload: {
-          list
+          stores
         }
       });
     });
@@ -44,9 +44,17 @@ export class StoresActions {
   }
 
   deleteStore(id): void {
-    this.ngRedux.dispatch({
-      type: StoresActions.STORES_DELETE,
-      payload: { id }
+
+    this.http.delete(
+      "http://localhost:8000/services/stores/"+id ,
+       this.generateHeaders()
+    ).subscribe((res: Response) => {
+      const list = res.json();
+      console.log(res.json());
+      this.ngRedux.dispatch({
+        type: StoresActions.STORES_DELETE,
+        payload: { id }
+      });
     });
   }
 

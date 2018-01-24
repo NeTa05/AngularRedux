@@ -16,13 +16,14 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HeaderComponent } from './components/header/header.component';
 import { TableComponent } from './components/table/table.component';
 
+//Redux
 import { NgReduxModule } from '@angular-redux/store';
 import { NgRedux, DevToolsExtension } from '@angular-redux/store';
-import { rootReducer } from './store/main.reducer';
-import { IAppState } from './store/app.state';
-import { UsersActions } from './actions/users.actions';
-import { StoresActions } from './actions/stores.actions';
+import { Reducers } from './stores/index.reducer';
+import { AppState } from './stores/app.state';
+import { Actions } from './actions/index.actions';
 
+//Routes
 const routes: Routes = [
   { path: '', redirectTo: 'store', pathMatch: 'full' },
   { path: 'store', component: StoresComponent },
@@ -46,21 +47,17 @@ const routes: Routes = [
     NgReduxModule,
     RouterModule.forRoot(routes, { useHash: true })
   ],
-  providers: [UsersActions, StoresActions],
+  providers: [Actions],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   
   constructor(
-    private ngRedux: NgRedux<IAppState>,
+    private ngRedux: NgRedux<AppState>,
     private devTool: DevToolsExtension
   ) {
-
-    this.ngRedux.configureStore(
-      rootReducer,
-      {} as IAppState,
-      [],
-      [ devTool.isEnabled() ? devTool.enhancer() : f => f]
+    let devTools = devTool.isEnabled() ? devTool.enhancer() : f => f;
+    this.ngRedux.configureStore(Reducers,{} as AppState, [], [devTools]
     );
   }
 }

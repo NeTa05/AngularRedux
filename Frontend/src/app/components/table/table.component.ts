@@ -1,10 +1,8 @@
 import { Component, Inject, Input } from '@angular/core';
 import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs';
-import { User } from '../../model/users';
 import { Store } from '../../models/store.model';
 import { StoresActions } from '../../actions/stores.actions';
-import { UsersActions } from '../../actions/users.actions';
 
 @Component({
   selector: 'app-table',
@@ -21,11 +19,9 @@ import { UsersActions } from '../../actions/users.actions';
 })
 export class TableComponent{
 	@select() public stores: Observable<Store>;
-	@select() public users: Observable<User>;
 
-	constructor(public storesActions:  StoresActions, public usersActions: UsersActions) {  
+	constructor(public storesActions:  StoresActions) {  
 		storesActions.getStores();
-		usersActions.getUsers();
 		console.log(this.stores);
 	}
 }
