@@ -1,24 +1,8 @@
-
-
 <app-navigation>
 </app-navigation>
-<div>
-     TOTAL USER: {{ (users | async).length }}
 
-     <hr />
-     <li class="list-group-item"
-         *ngFor="let item of (users | async)">
-        {{item.name}}
-        <button class="btn btn-xs pull-right" 
-          (click)="actions.deleteUser( item.id)">
-          delete
-        </button>
-      </li>
-
-    </div>  
 <div id="content">
   <div class="container">
     <router-outlet></router-outlet>
   </div>
 </div>
-

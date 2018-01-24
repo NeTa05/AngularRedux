@@ -1,5 +1,8 @@
+import { Store } from '../models/store.model';
 import { User } from '../model/users';
 
+
 export interface IAppState {
-  users: User[];
+  stores: Store[];
+  //users: User[];
 };

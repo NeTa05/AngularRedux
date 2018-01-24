@@ -11,16 +11,16 @@ import {
 
 
 @Injectable()
-export class UsersActions {
-  static USERS_GET = 'USERS_GET';
-  static USERS_DELETE = 'USERS_DELETE';
+export class StoresActions {
+  static STORES_GET = 'STORES_GET';
+  static STORES_DELETE = 'STORES_DELETE';
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private http: Http
   ) { }
   
-  getUsers() {    
+  getStores() {    
     
     this.http.get(
       "http://localhost:8000/services/stores",
@@ -29,7 +29,7 @@ export class UsersActions {
       const list = res.json();
       console.log(res.json());
       this.ngRedux.dispatch({
-        type: UsersActions.USERS_GET,
+        type: StoresActions.STORES_GET,
         payload: {
           list
         }
@@ -43,9 +43,9 @@ export class UsersActions {
     return new RequestOptions({headers: headers});
   }
 
-  deleteUser(id): void {
+  deleteStore(id): void {
     this.ngRedux.dispatch({
-      type: UsersActions.USERS_DELETE,
+      type: StoresActions.STORES_DELETE,
       payload: { id }
     });
   }

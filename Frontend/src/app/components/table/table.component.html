@@ -1,3 +1,21 @@
+
+
+<div>
+     TOTAL USER: {{ (users | async).length }}
+
+     <hr />
+     <li class="list-group-item"
+         *ngFor="let item of (users | async)">
+        {{item.name}}
+        <button class="btn btn-xs pull-right" 
+          (click)="actions.deleteUser( item.id)">
+          delete
+        </button>
+      </li>
+
+    </div>  
+
+
 <table class="table">
     <thead>
         <tr>
@@ -7,11 +25,11 @@
         </tr>
     </thead>
     <tbody >
-        <tr>
+        <tr *ngFor="let store of (stores | async)">
             <td>
-                <a href="#/product/1" class="">store.name</a>
+                <a href="#/product/1" class="">{{store.name}}</a>
             </td> 
-            <td>store.address}}</td>
+            <td>{{store.address}}</td>
             <td class="actions">
                 <a href="#/product/1/edit" class="btn btn-warning pull-left">Edit</a> 
                 <a href="#/product/1/delete" class="btn btn-danger pull-right">Delete</a>

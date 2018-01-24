@@ -1,4 +1,4 @@
-import { UsersActions } from '../actions/users.actions';
+import { StoresActions } from '../actions/stores.actions';
 import { User } from '../model/users';
 
 import { Store } from '../models/store.model';
@@ -20,14 +20,13 @@ const FAKE_DATA: Store[] = [
 ];
 
 
-export function UsersReducer(state: Store[] = INITIAL_STATE, action: any): any {
+export function StoresReducer(state: Store[] = INITIAL_STATE, action: any): any {
 
   switch (action.type) {
-    case UsersActions.USERS_GET:
-      let asd = action.payload.list;
-      //return Object.assign({}, state, { list: FAKE_DATA });
-      return [...FAKE_DATA];
-    case UsersActions.USERS_DELETE:
+    case StoresActions.STORES_GET:
+      let asd = action.payload.list.stores;
+      return action.payload.list.store;//[...FAKE_DATA];
+    case StoresActions.STORES_DELETE:
       return state.filter(({ id }) => id !== action.payload.id);
 
     default:

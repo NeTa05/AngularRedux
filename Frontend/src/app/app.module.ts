@@ -21,6 +21,7 @@ import { NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { rootReducer } from './store/main.reducer';
 import { IAppState } from './store/app.state';
 import { UsersActions } from './actions/users.actions';
+import { StoresActions } from './actions/stores.actions';
 
 const routes: Routes = [
   { path: '', redirectTo: 'store', pathMatch: 'full' },
@@ -45,7 +46,7 @@ const routes: Routes = [
     NgReduxModule,
     RouterModule.forRoot(routes, { useHash: true })
   ],
-  providers: [UsersActions],
+  providers: [UsersActions, StoresActions],
   bootstrap: [AppComponent]
 })
 export class AppModule {
