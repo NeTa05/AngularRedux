@@ -1,5 +1,9 @@
 
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { select } from '@angular-redux/store';
+import { Observable } from 'rxjs';
+import { User } from './model/users';
+import { UsersActions } from './actions/users.actions';
 
 import {
 	Store as StoreModel
@@ -7,10 +11,14 @@ import {
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: 'app.component.html'
 })
 export class AppComponent {
 
-	constructor() {
+	@select() public users: Observable<User>;
+
+	constructor(public actions:  UsersActions) {
+		console.log('component')
+		actions.getUsers();
 	}
 }
