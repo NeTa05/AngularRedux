@@ -14,6 +14,7 @@ import {
 export class StoresActions {
   static STORES_GET = 'STORES_GET';
   static STORES_DELETE = 'STORES_DELETE';
+  static STORES_POST = 'STORES_POST';
 
   constructor(
     private ngRedux: NgRedux<AppState>,
@@ -40,6 +41,8 @@ export class StoresActions {
   generateHeaders() {
     const headers = new Headers();
     headers.append('Authorization', 'Basic am9yZ2U6Z2FwMTIz');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
     return new RequestOptions({headers: headers});
   }
 
@@ -55,6 +58,28 @@ export class StoresActions {
         type: StoresActions.STORES_DELETE,
         payload: { id }
       });
+    });
+  }
+
+  createStore(jsonStore: any) {
+    this.http.post(
+      "http://localhost:8000/services/stores/" ,
+      JSON.stringify(jsonStore),
+       this.generateHeaders()
+    ).subscribe((res: Response) => {
+      const list = res.json();
+      console.log(res.json());
+      this.ngRedux.dispatch({
+        type: StoresActions.STORES_POST,
+        payload: { store: list.store }
+      });
+    },
+    errorResponse => { 
+      const error = errorResponse.json();
+
+      //console.log(res.json());
+      alert(error.error_message);
+      //console.log('asd error');
     });
   }
 

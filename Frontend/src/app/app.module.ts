@@ -15,6 +15,7 @@ import { ArticlesComponent } from './components/articles/articles.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TableComponent } from './components/table/table.component';
+import { ConfirmationModalComponent } from './utils/confirmation-modal.component';
 
 //Redux
 import { NgReduxModule } from '@angular-redux/store';
@@ -30,6 +31,8 @@ const routes: Routes = [
   { path: 'article', component: ArticlesComponent }
 ];
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,8 @@ const routes: Routes = [
     ArticlesComponent,
     NavigationComponent,
     HeaderComponent,
-    TableComponent
+    TableComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,10 @@ const routes: Routes = [
     HttpModule,
     AppBootstrapModule,
     NgReduxModule,
-    RouterModule.forRoot(routes, { useHash: true })
+    RouterModule.forRoot(routes, { useHash: true }),
+  ],
+  entryComponents: [
+    ConfirmationModalComponent
   ],
   providers: [Actions],
   bootstrap: [AppComponent]
