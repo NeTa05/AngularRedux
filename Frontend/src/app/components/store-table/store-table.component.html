@@ -14,7 +14,7 @@
             </td> 
             <td>{{store.address}}</td>
             <td class="actions">
-                <a href="#/product/1/edit" class="btn btn-warning pull-left">Edit</a> 
+                <a class="btn btn-warning pull-left" (click)="editStore(store)">Edit</a> 
                 <a class="btn btn-danger pull-right" 
                     (click)="storesActions.deleteStore(store.id)" >Delete</a>
             </td>

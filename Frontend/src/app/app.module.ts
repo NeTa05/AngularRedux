@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   RouterModule,
@@ -13,9 +13,9 @@ import { AppBootstrapModule } from './modules/app-bootstrap.module';
 import { StoresComponent } from './components/stores/stores.component';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { HeaderComponent } from './components/header/header.component';
-import { TableComponent } from './components/table/table.component';
-import { ConfirmationModalComponent } from './utils/confirmation-modal.component';
+import { StoreHeaderComponent } from './components/store-header/store-header.component';
+import { StoreTableComponent } from './components/store-table/store-table.component';
+import { StoreModalComponent } from './components/store-modal/store-modal.component';
 
 //Redux
 import { NgReduxModule } from '@angular-redux/store';
@@ -32,27 +32,27 @@ const routes: Routes = [
 ];
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     StoresComponent,
     ArticlesComponent,
     NavigationComponent,
-    HeaderComponent,
-    TableComponent,
-    ConfirmationModalComponent
+    StoreHeaderComponent,
+    StoreTableComponent,
+    StoreModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppBootstrapModule,
     NgReduxModule,
     RouterModule.forRoot(routes, { useHash: true }),
   ],
   entryComponents: [
-    ConfirmationModalComponent
+    StoreModalComponent
   ],
   providers: [Actions],
   bootstrap: [AppComponent]

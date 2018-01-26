@@ -1,20 +1,20 @@
 
-<form #form="ngForm"
-        (ngSubmit)="onSubmit(form.value)" *ngIf="active">
+<form [formGroup]="myForm"
+        (ngSubmit)="onSubmit(myForm.value)" *ngIf="active">
     <div class="modal-header">
         <h4 class="modal-title pull-left">
             {{title}}
         </h4>
-        <button type="button" class="close pull-right" (click)="hideConfirmationModal()" aria-label="Close">
+        <button type="button" class="close pull-right" (click)="onCancel()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <input type="email" name="name"  class="form-control" placeholder="Name" required="" ngModel>
+            <input type="email" name="name"  class="form-control" placeholder="Name" [formControl]="myForm.controls['name']">
         </div>
         <div class="form-group">
-            <textarea id="address" name="address"  class="form-control" rows="3" placeholder="Address" required="" ngModel></textarea>
+            <textarea id="address" name="address"  class="form-control" rows="3" placeholder="Address" [formControl]="myForm.controls['address']"></textarea>
         </div>
     </div>
     <div class="modal-footer">

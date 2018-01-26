@@ -2,9 +2,15 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
+import {
+  FormBuilder,
+  FormGroup
+} from '@angular/forms';
+
+
 @Component({
-    selector: 'app-confirmation-modal',
-    templateUrl: './confirmation-modal.component.html',
+    selector: 'app-store-modal',
+    templateUrl: './store-modal.component.html',
     styles: [
         `
         #address {
@@ -14,23 +20,35 @@ import { Subject } from 'rxjs/Subject';
         `
     ]
 })
-export class ConfirmationModalComponent implements OnInit {
-    public active: boolean;
-    public body: string;
-    public title: string;
-    public onClose: Subject<any>;
+export class StoreModalComponent implements OnInit {
+    active: boolean;
+    body: string;
+    title: string;
+    onClose: Subject<any>;
+    myForm: FormGroup;
+    formBuilder: FormBuilder;
 
-    constructor(private _bsModalRef: BsModalRef) {
+
+    constructor(private _bsModalRef: BsModalRef, formBuilder?: FormBuilder) {
+        this.formBuilder = formBuilder;
+        this.myForm = this.formBuilder.group({
+            name: '',
+            address: ''
+        });
     }
 
     ngOnInit(): void {
         this.onClose = new Subject();
     }
 
-    showConfirmationModal(title: string, body: string): void {
+    showModal(title: string, body: string, store?: any): void {
         this.title = title;
         this.body =  body;
         this.active = true;
+        
+        if (store) {
+            this.myForm = this.formBuilder.group(store);
+        }
     }
 
     onSubmit(form: any): void {
@@ -47,13 +65,9 @@ export class ConfirmationModalComponent implements OnInit {
 
     onCancel(): void {
         this.active = false;
-        this.onClose.next(false);
-        this._bsModalRef.hide();
-    }
-
-    hideConfirmationModal(): void {
-        this.active = false;
-        this.onClose.next(null);
+        this.onClose.next({
+            submit: false
+        });
         this._bsModalRef.hide();
     }
 }

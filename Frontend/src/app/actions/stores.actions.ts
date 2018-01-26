@@ -15,20 +15,16 @@ export class StoresActions {
   static STORES_GET = 'STORES_GET';
   static STORES_DELETE = 'STORES_DELETE';
   static STORES_POST = 'STORES_POST';
+  static STORES_PUT = 'STORES_PUT';
 
-  constructor(
-    private ngRedux: NgRedux<AppState>,
-    private http: Http
-  ) { }
+  constructor(private ngRedux: NgRedux<AppState>,private http: Http) { }
   
   getStores() {    
-    
     this.http.get(
       "http://localhost:8000/services/stores",
        this.generateHeaders()
     ).subscribe((res: Response) => {
       const stores = res.json().store;
-      console.log(res.json());
       this.ngRedux.dispatch({
         type: StoresActions.STORES_GET,
         payload: {
@@ -53,7 +49,6 @@ export class StoresActions {
        this.generateHeaders()
     ).subscribe((res: Response) => {
       const list = res.json();
-      console.log(res.json());
       this.ngRedux.dispatch({
         type: StoresActions.STORES_DELETE,
         payload: { id }
@@ -68,7 +63,6 @@ export class StoresActions {
        this.generateHeaders()
     ).subscribe((res: Response) => {
       const list = res.json();
-      console.log(res.json());
       this.ngRedux.dispatch({
         type: StoresActions.STORES_POST,
         payload: { store: list.store }
@@ -76,10 +70,25 @@ export class StoresActions {
     },
     errorResponse => { 
       const error = errorResponse.json();
-
-      //console.log(res.json());
       alert(error.error_message);
-      //console.log('asd error');
+    });
+  }
+
+  updateStore(store: any) {
+    this.http.put(
+      "http://localhost:8000/services/stores/"+ store.id ,
+      JSON.stringify(store),
+       this.generateHeaders()
+    ).subscribe((res: Response) => {
+      const stores = res.json().store;
+      this.ngRedux.dispatch({
+        type: StoresActions.STORES_PUT,
+        payload: { stores }
+      });
+    },
+    errorResponse => { 
+      const error = errorResponse.json();
+      alert(error.error_message);
     });
   }
 
