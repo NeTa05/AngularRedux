@@ -23,6 +23,9 @@ import { NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { Reducers } from './stores/index.reducer';
 import { AppState } from './stores/app.state';
 import { Actions } from './actions/index.actions';
+import { ArticleHeaderComponent } from './components/article-header/article-header.component';
+import { ArticleModalComponent } from './components/article-modal/article-modal.component';
+import { ArticleTableComponent } from './components/article-table/article-table.component';
 
 //Routes
 const routes: Routes = [
@@ -40,7 +43,10 @@ const routes: Routes = [
     NavigationComponent,
     StoreHeaderComponent,
     StoreTableComponent,
-    StoreModalComponent
+    StoreModalComponent,
+    ArticleHeaderComponent,
+    ArticleModalComponent,
+    ArticleTableComponent
   ],
   imports: [
     BrowserModule,
@@ -52,19 +58,16 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
   ],
   entryComponents: [
-    StoreModalComponent
+    StoreModalComponent,
+    ArticleModalComponent
   ],
   providers: [Actions],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   
-  constructor(
-    private ngRedux: NgRedux<AppState>,
-    private devTool: DevToolsExtension
-  ) {
+  constructor(private ngRedux: NgRedux<AppState>, private devTool: DevToolsExtension) {
     let devTools = devTool.isEnabled() ? devTool.enhancer() : f => f;
-    this.ngRedux.configureStore(Reducers,{} as AppState, [], [devTools]
-    );
+    this.ngRedux.configureStore(Reducers,{} as AppState, [], [devTools]);
   }
 }

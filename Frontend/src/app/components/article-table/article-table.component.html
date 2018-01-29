@@ -1,0 +1,30 @@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Total in shelf</th>
+            <th>Total in vault</th>
+			<th>Store</th>            
+            <th class="col-sm-2">Actions</th>
+        </tr>
+    </thead>
+    <tbody >
+        <tr *ngFor="let article of (articles | async).articles">
+            <td>
+                <a href="#/product/1" class="">{{article.name}}</a>
+            </td> 
+            <td>{{article.description}}</td>
+            <td>{{article.price}}</td>
+            <td>{{article.total_in_shelf}}</td>
+            <td>{{article.total_in_vault}}</td>
+            <td class="actions">
+                <a class="btn btn-warning pull-left" (click)="editStore(article)">Edit</a> 
+                <a class="btn btn-danger pull-right" 
+                    (click)="articlesActions.deleteArticle(article.id)" >Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
