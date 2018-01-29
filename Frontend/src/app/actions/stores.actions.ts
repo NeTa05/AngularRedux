@@ -4,11 +4,10 @@ import { NgRedux } from '@angular-redux/store';
 
 import {
   Http, 
-  Response,
-  RequestOptions,
-  Headers  
+  Response
 } from '@angular/http';
 
+import { CommonService } from '../services/common.service';
 
 @Injectable()
 export class StoresActions {
@@ -17,12 +16,12 @@ export class StoresActions {
   static STORES_POST = 'STORES_POST';
   static STORES_PUT = 'STORES_PUT';
 
-  constructor(private ngRedux: NgRedux<AppState>,private http: Http) { }
+  constructor(private ngRedux: NgRedux<AppState>,private http: Http, private commonService: CommonService) { }
   
   getStores() {    
     this.http.get(
       "http://localhost:8000/services/stores",
-       this.generateHeaders()
+       this.commonService.getHeaders()
     ).subscribe((res: Response) => {
       const stores = res.json().store;
       this.ngRedux.dispatch({
@@ -34,19 +33,11 @@ export class StoresActions {
     });
   }
 
-  generateHeaders() {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic am9yZ2U6Z2FwMTIz');
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    return new RequestOptions({headers: headers});
-  }
-
   deleteStore(id): void {
 
     this.http.delete(
       "http://localhost:8000/services/stores/"+id ,
-       this.generateHeaders()
+       this.commonService.getHeaders()
     ).subscribe((res: Response) => {
       const list = res.json();
       this.ngRedux.dispatch({
@@ -60,7 +51,7 @@ export class StoresActions {
     this.http.post(
       "http://localhost:8000/services/stores/" ,
       JSON.stringify(jsonStore),
-       this.generateHeaders()
+       this.commonService.getHeaders()
     ).subscribe((res: Response) => {
       const list = res.json();
       this.ngRedux.dispatch({
@@ -78,7 +69,7 @@ export class StoresActions {
     this.http.put(
       "http://localhost:8000/services/stores/"+ store.id ,
       JSON.stringify(store),
-       this.generateHeaders()
+       this.commonService.getHeaders()
     ).subscribe((res: Response) => {
       const stores = res.json().store;
       this.ngRedux.dispatch({
