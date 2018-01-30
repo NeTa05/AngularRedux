@@ -47,13 +47,12 @@ export class ArticleModalComponent implements OnInit {
         this.onClose = new Subject();
     }
 
-    showModal(title: string, body: string, store?: any): void {
+    showModal(title: string, article?: any): void {
         this.title = title;
-        this.body =  body;
         this.active = true;
         
-        if (store) {
-            this.myForm = this.formBuilder.group(store);
+        if (article) {
+            this.myForm = this.formBuilder.group(article);
         }
     }
 
@@ -64,9 +63,12 @@ export class ArticleModalComponent implements OnInit {
             this.active = false;
             this.onClose.next({
                 submit: true,
-                store: {
-                    address: form.address,
-                    name: form.name
+                article: {
+                    name: form.name,
+                    description: form.description,
+                    price: form.price,
+                    total_in_shelf: form.total_in_shelf,
+                    total_in_vault: form.total_in_vault
                 }
             });
             this._bsModalRef.hide();

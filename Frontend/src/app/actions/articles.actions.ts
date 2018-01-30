@@ -56,16 +56,16 @@ export class ArticlesActions {
     });
   }
 
-  createArticle(jsonStore: any) {
+  createArticle(jsonArticle: any) {
     this.http.post(
       this.URL,
-      JSON.stringify(jsonStore),
+      JSON.stringify(jsonArticle),
        this.commonService.getHeaders()
     ).subscribe((res: Response) => {
-      const list = res.json();
+      const article = res.json().article;
       this.ngRedux.dispatch({
         type: ArticlesActions.ARTICLES_POST,
-        payload: { store: list.store }
+        payload: { article }
       });
     },
     errorResponse => { 

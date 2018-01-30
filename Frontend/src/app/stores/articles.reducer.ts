@@ -14,7 +14,7 @@ export function ArticlesReducer(state: Articles = INITIAL_STATE, action: any): a
       articles = state.articles.filter(({ id }) => id !== action.payload.id);
       return Object.assign({}, state, { articles: articles }); 
     case ArticlesActions.ARTICLES_POST:
-      state.articles.push(action.payload.store);
+      state.articles.push(action.payload.article);
       return state;
     case ArticlesActions.ARTICLES_PUT:
       articles = [...state.articles];

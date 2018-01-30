@@ -71,7 +71,8 @@ class ArticleController extends Controller
             $validator = $this->validator($this->rules());
             $fields = ['name' => request('name'), 'description' => request('description'), 'price' => request('price'), 
                     'total_in_shelf' => request('total_in_shelf'), 'total_in_vault' => request('total_in_vault'), 
-                    'store_id' => request('store_id')];
+                    //'store_id' => request('store_id')
+                ];
 
             if($validator->fails()){
                 return $this->error(
@@ -95,11 +96,14 @@ class ArticleController extends Controller
     */
     public function update($articleId)
     {
+
         try {
             $validator = $this->validator($this->rules());
+
             $fields = ['name' => request('name'), 'description' => request('description'), 'price' => request('price'), 
                     'total_in_shelf' => request('total_in_shelf'), 'total_in_vault' => request('total_in_vault'), 
-                    'store_id' => request('store_id'), 'id' => $articleId];
+                    //'store_id' => request('store_id'), 
+                    'id' => $articleId];
             if($validator->fails()){
                 return $this->error(
                     "BAD_REQUEST",

@@ -19,17 +19,16 @@ export class ArticleTableComponent {
 		articlesActions.getArticles();
 	}
 
-	editStore(store: any){
+	editStore(article: any){
     	const modal = this._bsModalService.show(ArticleModalComponent);
 		(<ArticleModalComponent>modal.content).showModal(
 		    'Edit article',
-		    'Body text',
-		    store
+		    article
 		);
 		(<ArticleModalComponent>modal.content).onClose.subscribe(result => {
 		    if (result.submit) {
-		    	result.store.id = store.id;
-      			this.articlesActions.updateArticle(result.store);
+		    	result.article.id = article.id;
+      			this.articlesActions.updateArticle(result.article);
 		    } 
 		});
   	}

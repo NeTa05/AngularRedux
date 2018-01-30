@@ -23,13 +23,10 @@ export class ArticleHeaderComponent implements OnInit {
 
   addArticle(){
     const modal = this._bsModalService.show(ArticleModalComponent);
-    (<ArticleModalComponent>modal.content).showModal(
-        'Add store',
-        'Body text'
-    );
+    (<ArticleModalComponent>modal.content).showModal('Add article');
     (<ArticleModalComponent>modal.content).onClose.subscribe(result => {
         if (result.submit) {
-          //this.storesActions.createStore(result.store);
+          this.articlesActions.createArticle(result.article);
         }
     });
   }

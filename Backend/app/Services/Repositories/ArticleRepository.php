@@ -63,7 +63,7 @@ class ArticleRepository
             $updateArticle->price = $article['price'];
             $updateArticle->total_in_shelf = $article['total_in_shelf'];
             $updateArticle->total_in_vault = $article['total_in_vault'];
-            $updateArticle->store_id = $article['store_id'];
+           // $updateArticle->store_id = $article['store_id'];
             $updateArticle->save();
         }
         return $updateArticle;
