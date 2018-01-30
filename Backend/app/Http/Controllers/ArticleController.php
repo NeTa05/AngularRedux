@@ -174,6 +174,7 @@ class ArticleController extends Controller
             'price' => 'required|numeric|between:1,100',
             'total_in_shelf' => 'required|numeric|between:1,100',
             'total_in_vault' => 'required|numeric|between:1,100',
-            'store_id' => 'required|exists:stores,id'];
+            //'store_id' => 'required|exists:stores,id'
+        ];
     }
 }

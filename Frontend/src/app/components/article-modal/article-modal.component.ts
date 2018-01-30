@@ -1,19 +1,20 @@
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { ValidatorService } from '../../services/validator.service';
 
 import {
   FormBuilder,
-  FormGroup
+  FormGroup,
+  Validators
 } from '@angular/forms';
-
 
 @Component({
     selector: 'app-article-modal',
     templateUrl: './article-modal.component.html',
     styles: [
         `
-        #address {
+        #description {
             overflow: auto; 
             resize: none;
         }
@@ -27,13 +28,18 @@ export class ArticleModalComponent implements OnInit {
     onClose: Subject<any>;
     myForm: FormGroup;
     formBuilder: FormBuilder;
+    submitted: boolean;
 
 
-    constructor(private _bsModalRef: BsModalRef, formBuilder?: FormBuilder) {
+    constructor(private _bsModalRef: BsModalRef, formBuilder: FormBuilder, private validatorService: ValidatorService) {
         this.formBuilder = formBuilder;
+       // this.validatorService.has
         this.myForm = this.formBuilder.group({
-            name: '',
-            address: ''
+            name: ['', [Validators.required, Validators.maxLength(255)]],
+            description: ['', [Validators.required, Validators.maxLength(255)]],
+            price: ['', [Validators.required, Validators.max(100) ]],
+            total_in_shelf: ['', [Validators.required, Validators.max(100) ]],
+            total_in_vault: ['', [Validators.required, Validators.max(100) ]],
         });
     }
 
@@ -52,15 +58,19 @@ export class ArticleModalComponent implements OnInit {
     }
 
     onSubmit(form: any): void {
-        this.active = false;
-        this.onClose.next({
-            submit: true,
-            store: {
-                address: form.address,
-                name: form.name
-            }
-        });
-        this._bsModalRef.hide();
+        
+        this.submitted = true;
+        if (this.myForm.valid) {
+            this.active = false;
+            this.onClose.next({
+                submit: true,
+                store: {
+                    address: form.address,
+                    name: form.name
+                }
+            });
+            this._bsModalRef.hide();
+        }
     }
 
     onCancel(): void {

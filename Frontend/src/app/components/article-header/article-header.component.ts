@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap';
+import { ArticleModalComponent } from '../article-modal/article-modal.component';
+import { ArticlesActions } from '../../actions/articles.actions';
 
 @Component({
   selector: 'app-article-header',
@@ -13,9 +16,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _bsModalService: BsModalService, public articlesActions:  ArticlesActions) { }
 
   ngOnInit() {
+  }
+
+  addArticle(){
+    const modal = this._bsModalService.show(ArticleModalComponent);
+    (<ArticleModalComponent>modal.content).showModal(
+        'Add store',
+        'Body text'
+    );
+    (<ArticleModalComponent>modal.content).onClose.subscribe(result => {
+        if (result.submit) {
+          //this.storesActions.createStore(result.store);
+        }
+    });
   }
 
 }

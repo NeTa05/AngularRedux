@@ -10,11 +10,45 @@
         </button>
     </div>
     <div class="modal-body">
-        <div class="form-group">
+
+        <!--Errors -->
+        <div class="alert alert-danger" *ngIf="!myForm.valid && submitted">
+            <!--Name-->
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['name'], 'required')">The Name field is required.<br></strong>
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['name'], 'maxlength')">The Name may not be greater than 255 characters. <br></strong> 
+
+            <!--Description-->
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['description'], 'required')">The Description field is required.<br></strong> 
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['description'], 'maxlength')">The Name may not be greater than 255 characters. <br></strong>
+
+
+            <!--Price-->
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['price'], 'required')">The Price field is required.<br></strong> 
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['price'], 'max')">The Price may not be greater than 100.<br></strong> 
+
+            <!--Total In Shelf-->
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['total_in_shelf'], 'required')">The Total In Shelf field is required.<br></strong> 
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['total_in_shelf'], 'max')">The Total In Shelf may not be greater than 100.<br></strong> 
+
+            <!--Total In Vault-->
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['total_in_vault'], 'required')">The Total In Vault field is required.<br></strong> 
+            <strong *ngIf="validatorService.hasError(this.myForm.controls['total_in_vault'], 'max')">The Total In Vault may not be greater than 100.<br></strong> 
+
+        </div>
+        <div class="form-group" [class.has-error]="myForm.controls['name'].invalid && myForm.controls['name'].touched">
             <input type="email" name="name"  class="form-control" placeholder="Name" [formControl]="myForm.controls['name']">
         </div>
-        <div class="form-group">
-            <textarea id="address" name="address"  class="form-control" rows="3" placeholder="Address" [formControl]="myForm.controls['address']"></textarea>
+        <div class="form-group" [class.has-error]="myForm.controls['description'].invalid && myForm.controls['description'].touched">
+            <textarea id="description" name="description"  class="form-control" rows="3" placeholder="Description" [formControl]="myForm.controls['description']"></textarea>
+        </div>
+        <div class="form-group" [class.has-error]="myForm.controls['price'].invalid && myForm.controls['price'].touched">
+            <input type="number" name="price"  class="form-control" placeholder="Price" [formControl]="myForm.controls['price']">
+        </div>
+        <div class="form-group" [class.has-error]="myForm.controls['total_in_shelf'].invalid && myForm.controls['total_in_shelf'].touched">
+            <input type="number" name="total_in_shelf"  class="form-control" placeholder="Total In Shelf" [formControl]="myForm.controls['total_in_shelf']">
+        </div>
+        <div class="form-group" [class.has-error]="myForm.controls['total_in_vault'].invalid && myForm.controls['total_in_vault'].touched">
+            <input type="number" name="total_in_vault"  class="form-control" placeholder="Total In Vault" [formControl]="myForm.controls['total_in_vault']">
         </div>
     </div>
     <div class="modal-footer">

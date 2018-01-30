@@ -8,6 +8,10 @@ import {
 } from '@angular/http';
 
 import { CommonService } from '../services/common.service';
+import { BASE_URL, ARTICLE_URL } from '../utils/constants';
+import {
+  Inject
+} from '@angular/core';
 
 @Injectable()
 export class ArticlesActions {
@@ -15,16 +19,19 @@ export class ArticlesActions {
   static ARTICLES_DELETE = 'ARTICLES_DELETE';
   static ARTICLES_POST = 'ARTICLES_POST';
   static ARTICLES_PUT = 'ARTICLES_PUT';
+  URL: string;
 
-  constructor(private ngRedux: NgRedux<AppState>, private http: Http, private commonService: CommonService) { }
+  constructor(private ngRedux: NgRedux<AppState>, private http: Http, private commonService: CommonService,
+    @Inject(BASE_URL) private baseUrl: string, @Inject(ARTICLE_URL) private articleUrl: string) { 
+    this.URL = `${this.baseUrl}${this.articleUrl}`;
+  }
   
-  getArticles() {    
+  getArticles() {
     this.http.get(
-      "http://localhost:8000/services/articles",
+       this.URL,
        this.commonService.getHeaders()
     ).subscribe((res: Response) => {
       console.log(res);
-      
       const articles = res.json().article;
       this.ngRedux.dispatch({
         type: ArticlesActions.ARTICLES_GET,
@@ -38,8 +45,8 @@ export class ArticlesActions {
   deleteArticle(id): void {
 
     this.http.delete(
-      "http://localhost:8000/services/articles/"+id ,
-       this.commonService.getHeaders()
+      this.URL + id ,
+      this.commonService.getHeaders()
     ).subscribe((res: Response) => {
       const list = res.json();
       this.ngRedux.dispatch({
@@ -49,9 +56,9 @@ export class ArticlesActions {
     });
   }
 
-  createStore(jsonStore: any) {
+  createArticle(jsonStore: any) {
     this.http.post(
-      "http://localhost:8000/services/stores/" ,
+      this.URL,
       JSON.stringify(jsonStore),
        this.commonService.getHeaders()
     ).subscribe((res: Response) => {
@@ -69,7 +76,7 @@ export class ArticlesActions {
 
   updateArticle(article: any) {
     this.http.put(
-      "http://localhost:8000/services/articles/"+ article.id ,
+      this.URL + article.id ,
       JSON.stringify(article),
        this.commonService.getHeaders()
     ).subscribe((res: Response) => {

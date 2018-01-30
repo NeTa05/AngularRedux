@@ -34,8 +34,9 @@ import { ArticleModalComponent } from './components/article-modal/article-modal.
 import { ArticleTableComponent } from './components/article-table/article-table.component';
 
 // Providers
-import { CommonService } from './services/common.service';
+import { Services } from './services/index.service';
 import { Actions } from './actions/index.actions';
+import { Constants } from './utils/constants';
 
 //Routes
 const routes: Routes = [
@@ -73,7 +74,8 @@ const routes: Routes = [
   ],
   providers: [
     Actions, 
-    CommonService
+    Services,
+    Constants
   ],
   bootstrap: [AppComponent]
 })

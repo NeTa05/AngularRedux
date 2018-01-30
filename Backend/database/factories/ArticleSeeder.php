@@ -9,6 +9,6 @@ $factory->define(App\Article::class, function (Generator $faker) {
         'price' => $faker->randomFloat,
         'total_in_shelf' => $faker->randomNumber,
         'total_in_vault' => $faker->randomNumber,
-        'store_id' => $faker->numberBetween(1, 10)
+        //'store_id' => $faker->numberBetween(1, 10)
     ];
 });
